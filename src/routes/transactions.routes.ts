@@ -15,7 +15,7 @@ const upload = multer(uploadConfig);
 transactionsRouter.get('/', async (request, response) => {
   const transactionsRepository = getCustomRepository(TransactionsRepository);
   const transactions = await transactionsRepository.find({
-    relations: ['category'],
+    // relations: ['category'],
     // join: {
     //   alias: 'transaction',
     //   innerJoinAndSelect: {
@@ -23,15 +23,15 @@ transactionsRouter.get('/', async (request, response) => {
     //   },
     // },
     // select: ['id', 'title', 'value', 'type'],
-    select: ['id', 'title', 'value', 'type', 'category'],
+    // select: ['id', 'title', 'value', 'type', 'category'],
   });
 
-  transactions.map(transaction => {
-    delete transaction.category.created_at;
-    delete transaction.category.updated_at;
+  // transactions.map(transaction => {
+  //   delete transaction.category.created_at;
+  //   delete transaction.category.updated_at;
 
-    return transaction;
-  });
+  //   return transaction;
+  // });
 
   const balance = await transactionsRepository.getBalance();
 
